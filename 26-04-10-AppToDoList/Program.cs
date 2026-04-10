@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 class Program // The main class of the To-Do List App
 {
@@ -14,7 +15,7 @@ class Program // The main class of the To-Do List App
         Console.WriteLine("1. Add a task");
         Console.WriteLine("2. View tasks");
         Console.WriteLine("3. Delete a task");
-        Console.WriteLine("4. Take a task for finish");
+        Console.WriteLine("4. Mark a task as completed");
         Console.WriteLine("5. Exit"); 
         Console.WriteLine("------------------------------");
 
@@ -62,8 +63,31 @@ class Program // The main class of the To-Do List App
                     }
                     break;
                 case 4:
-                    Console.WriteLine("Taking a task for finish");
-                    // Code to take a task for finish goes here
+                    Console.WriteLine("Mark a task as completed");
+                    Console.Write("Enter the task number to mark as completed or not finished: "); // L'invite pour que l'utilisateur entre le numéro de la tâche à marquer comme terminée ou non terminée
+                    int taskNumberToMark = int.Parse(Console.ReadLine());
+                    if (taskNumberToMark > 0 && taskNumberToMark <= tasks.Count) // Vérification si le numéro de tâche est valide
+                    {
+                        string task = tasks[taskNumberToMark - 1]; // Récupérer la tâche à marquer
+                        if (task.StartsWith("[X]")) // Vérification si la tâche est déjà marquée comme terminée
+                        {
+                            tasks[taskNumberToMark - 1] = task.Substring(3); // Si oui, la marquer comme non terminée en supprimant le préfixe "[X]"
+                            Console.WriteLine("Task marked as not completed!"); // Confirmer que la tâche a été marquée comme non terminée
+                        }
+                        else
+                        {
+                            tasks[taskNumberToMark - 1] = "[X] " + task; // Si non, la marquer comme terminée en ajoutant le préfixe "[X]"
+                            Console.WriteLine("Task marked as completed!"); // Confirmer que la tâche a été marquée comme terminée
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid task number. Please try again."); // Afficher un message d'erreur si le numéro de tâche n'est pas valide
+                    }
+
+
+
+
                     break;
                 default:
                     Console.WriteLine("Invalid choice. Please try again.");
@@ -74,7 +98,7 @@ class Program // The main class of the To-Do List App
             Console.WriteLine("1. Add a task");
             Console.WriteLine("2. View tasks");
             Console.WriteLine("3. Delete a task");
-            Console.WriteLine("4. Take a task for finish");
+            Console.WriteLine("4. Mark a task as completed");
             Console.WriteLine("5. Exit");
             Console.WriteLine("------------------------------");
             Console.Write("Enter your choice: "); // L'invite pour que l'utilisateur entre son choix à nouveau
