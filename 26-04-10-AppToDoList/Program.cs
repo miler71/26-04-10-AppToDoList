@@ -26,7 +26,11 @@ class Program // The main class of the To-Do List App
             {
                 case 1:
                     Console.WriteLine("Adding a task");
-                    
+                    List<string> tasks = new List<string>(); // Créer une liste pour stocker les tâches
+                    Console.Write("Enter the task description: "); // L'invite pour que l'utilisateur entre la description de la tâche
+                    string taskDescription = Console.ReadLine(); // Lire la description de la tâche
+                    tasks.Add(taskDescription); // Ajouter la tâche à la liste
+                    Console.WriteLine("Task added successfully!"); // Confirmer que la tâche a été ajoutée
                     break;
                 case 2:
                     Console.WriteLine("Viewing tasks...");
